@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="dH2-Z3-Uqz">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Tka-rl-fui">
+            <objects>
+                <navigationController id="dH2-Z3-Uqz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WyO-O5-yrN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="MMC-Oh-REZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEq-8H-Y4h" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-355" y="343"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Foodeals" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hB8-5U-UOo">
+                                <rect key="frame" x="0.0" y="64" width="600" height="608"/>
+                            </mapView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1U-cY-tT7">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Current Location" id="LyP-Fe-aK2">
+                                        <connections>
+                                            <action selector="goToMyLocation:" destination="BYZ-38-t0r" id="qcV-ei-q6q"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hB8-5U-UOo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3Vq-y7-17j"/>
+                            <constraint firstItem="hB8-5U-UOo" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" constant="8" id="USg-Z7-02N"/>
+                            <constraint firstItem="U1U-cY-tT7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="lPS-3W-86N"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="U1U-cY-tT7" secondAttribute="bottom" id="rGW-Qz-F0A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hB8-5U-UOo" secondAttribute="trailing" constant="-20" id="tP6-wD-QZP"/>
+                            <constraint firstItem="hB8-5U-UOo" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="uBt-gK-fHf"/>
+                            <constraint firstItem="U1U-cY-tT7" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="xS3-sf-gcd"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="VSp-1A-u3l"/>
+                    <connections>
+                        <outlet property="displayMap" destination="hB8-5U-UOo" id="1B5-iy-g5g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="387" y="322"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="y9j-JV-MBV">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="9Eb-of-f2p" customClass="WebViewController" customModule="Foodeals" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="T5N-4O-cIf"/>
+                        <viewControllerLayoutGuide type="bottom" id="3sy-1o-XYt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zFu-VT-VA2">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEF-bf-XFP">
+                                <rect key="frame" x="0.0" y="65" width="600" height="563"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CEF-bf-XFP" firstAttribute="width" secondItem="zFu-VT-VA2" secondAttribute="width" id="FxB-Pf-lGJ"/>
+                            <constraint firstItem="CEF-bf-XFP" firstAttribute="leading" secondItem="zFu-VT-VA2" secondAttribute="leadingMargin" constant="-20" id="TGB-Eh-0XY"/>
+                            <constraint firstItem="CEF-bf-XFP" firstAttribute="top" secondItem="T5N-4O-cIf" secondAttribute="bottom" constant="45" id="eht-OS-GHK"/>
+                            <constraint firstItem="CEF-bf-XFP" firstAttribute="height" secondItem="zFu-VT-VA2" secondAttribute="height" constant="-37" id="yW1-Rt-56A"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="CEF-bf-XFP" id="C0a-SY-cCF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zh8-fC-N6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088" y="322"/>
+        </scene>
+    </scenes>
+</document>
