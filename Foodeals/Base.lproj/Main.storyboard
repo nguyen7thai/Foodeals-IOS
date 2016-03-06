@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -40,18 +41,64 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U1U-cY-tT7">
                                 <rect key="frame" x="0.0" y="556" width="600" height="44"/>
                                 <items>
-                                    <barButtonItem title="Current Location" id="LyP-Fe-aK2">
-                                        <connections>
-                                            <action selector="goToMyLocation:" destination="BYZ-38-t0r" id="qcV-ei-q6q"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="DUu-Y4-6F2">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yNH-QG-wrf">
+                                            <rect key="frame" x="20" y="9.5" width="25" height="25"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button" image="current_location_icon"/>
+                                            <connections>
+                                                <action selector="myCurrentLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uzJ-ov-k9t"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DB3-ew-Tm8"/>
+                                    <barButtonItem style="plain" id="W4y-4J-xBa">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9A1-Gb-L8t">
+                                            <rect key="frame" x="241" y="7" width="118" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Show List"/>
+                                            <connections>
+                                                <action selector="showList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L7l-Cg-DX1"/>
+                                            </connections>
+                                        </button>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="c3H-wm-FrG"/>
                                 </items>
                             </toolbar>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EXl-Tp-rhz">
+                                <rect key="frame" x="0.0" y="309" width="600" height="247"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EXl-Tp-rhz" secondAttribute="height" multiplier="300:101" constant="-133.66336633663366" id="6Pu-Q6-qGV"/>
+                                </constraints>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dealRow" textLabel="vXA-bo-q28" style="IBUITableViewCellStyleDefault" id="A98-bd-XXS" customClass="DealTableRow" customModule="Foodeals" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A98-bd-XXS" id="mX7-ua-hPT">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vXA-bo-q28">
+                                                    <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hB8-5U-UOo" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="3Vq-y7-17j"/>
+                            <constraint firstItem="EXl-Tp-rhz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="DSs-NA-W7B"/>
+                            <constraint firstItem="EXl-Tp-rhz" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Jc7-Lu-6zU"/>
                             <constraint firstItem="hB8-5U-UOo" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" constant="8" id="USg-Z7-02N"/>
+                            <constraint firstItem="U1U-cY-tT7" firstAttribute="top" secondItem="EXl-Tp-rhz" secondAttribute="bottom" id="gei-1O-qn0"/>
                             <constraint firstItem="U1U-cY-tT7" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="lPS-3W-86N"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="U1U-cY-tT7" secondAttribute="bottom" id="rGW-Qz-F0A"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hB8-5U-UOo" secondAttribute="trailing" constant="-20" id="tP6-wD-QZP"/>
@@ -61,45 +108,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="VSp-1A-u3l"/>
                     <connections>
+                        <outlet property="dealTable" destination="EXl-Tp-rhz" id="tgZ-EZ-7wq"/>
                         <outlet property="displayMap" destination="hB8-5U-UOo" id="1B5-iy-g5g"/>
+                        <outlet property="showListButton" destination="9A1-Gb-L8t" id="e49-lY-4tZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="387" y="322"/>
         </scene>
-        <!--Web View Controller-->
-        <scene sceneID="y9j-JV-MBV">
-            <objects>
-                <viewController storyboardIdentifier="WebViewController" id="9Eb-of-f2p" customClass="WebViewController" customModule="Foodeals" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="T5N-4O-cIf"/>
-                        <viewControllerLayoutGuide type="bottom" id="3sy-1o-XYt"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="zFu-VT-VA2">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEF-bf-XFP">
-                                <rect key="frame" x="0.0" y="65" width="600" height="563"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
-                            </webView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="CEF-bf-XFP" firstAttribute="width" secondItem="zFu-VT-VA2" secondAttribute="width" id="FxB-Pf-lGJ"/>
-                            <constraint firstItem="CEF-bf-XFP" firstAttribute="leading" secondItem="zFu-VT-VA2" secondAttribute="leadingMargin" constant="-20" id="TGB-Eh-0XY"/>
-                            <constraint firstItem="CEF-bf-XFP" firstAttribute="top" secondItem="T5N-4O-cIf" secondAttribute="bottom" constant="45" id="eht-OS-GHK"/>
-                            <constraint firstItem="CEF-bf-XFP" firstAttribute="height" secondItem="zFu-VT-VA2" secondAttribute="height" constant="-37" id="yW1-Rt-56A"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="webView" destination="CEF-bf-XFP" id="C0a-SY-cCF"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zh8-fC-N6z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1088" y="322"/>
-        </scene>
     </scenes>
+    <resources>
+        <image name="current_location_icon" width="512" height="512"/>
+    </resources>
 </document>

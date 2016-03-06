@@ -11,12 +11,16 @@ import UIKit
 import MapKit
 
 
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
     let geocoder = CLGeocoder()
     let locationmgr = CLLocationManager()
     
+    var dealList:[DealItem] = []
+    
+    @IBOutlet weak var dealTable: UITableView!
     @IBOutlet weak var displayMap: MKMapView!
+    @IBOutlet weak var showListButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +28,8 @@ class ViewController: UIViewController, MKMapViewDelegate {
         
         self.displayMap.showsUserLocation = true
         self.displayMap.delegate = self
+        self.dealTable.dataSource = self
+        self.dealTable.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -31,7 +37,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
         client.getDeals { (data, error) in
             if error == nil {
                 var annotations = [MapPin]()
-                
+                self.dealList = data!
                 for deal in data! {
                     let annotation = MapPin()
                     annotation.title = deal.title
@@ -44,6 +50,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
                 }
                 
                 performUIUpdatesOnMain {
+                    self.dealTable.reloadData()
                     self.displayMap.addAnnotations(annotations)
                 }
             } else {
@@ -64,18 +71,17 @@ class ViewController: UIViewController, MKMapViewDelegate {
             let identifier = "pin"
             var view: MKPinAnnotationView
             if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-                as? MKPinAnnotationView { // 2
+                as? MKPinAnnotationView {
                     dequeuedView.annotation = annotation
                     view = dequeuedView
             } else {
-                // 3
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 view.canShowCallout = true
                 view.calloutOffset = CGPoint(x: -5, y: 5)
                 let button = MyButton(type: .DetailDisclosure)
                 button.url = annotation.dealUrl
-//                button.setValue(annotation.dealUrl, forKey: "deal_url")
                 view.rightCalloutAccessoryView = button as UIView
+
             }
             return view
         } else {
@@ -84,22 +90,59 @@ class ViewController: UIViewController, MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("click")
-//        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("WebViewController") as! WebViewController
         let button = control as! MyButton
-//        controller.url = button.url
         let url = NSURL(string: button.url!)
         UIApplication.sharedApplication().openURL(url!)
-//        self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    @IBAction func goToMyLocation(sender: UIBarButtonItem) {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let row = tableView.dequeueReusableCellWithIdentifier("dealRow")! as! DealTableRow
+        row.setItem(dealList[indexPath.item])
+        
+        return row
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dealList.count
+    }
+    
+
+    @IBAction func myCurrentLocation(sender: UIButton) {
         if let location = locationmgr.location {
             centerMapOnLocation(location)
+            self.dealList = self.sortDealListByDistance(self.dealList)
+            performUIUpdatesOnMain {
+                self.dealTable.reloadData()
+            }
+        }
+    }
+    
+    @IBAction func showList(sender: UIButton) {
+        let currentState = self.dealTable.hidden
+        self.dealTable.hidden = !currentState
+        if currentState {
+            showListButton.setTitle("Hide List", forState: UIControlState.Normal)
+        } else {
+            showListButton.setTitle("Show List", forState: UIControlState.Normal)
         }
     }
 
-
+    func sortDealListByDistance(list: [DealItem]) -> [DealItem] {
+        let userLocation = locationmgr.location!
+        return list.sort { (a, b) -> Bool in
+            let aLocation = CLLocation(latitude: a.lat, longitude: a.long)
+            let bLocation = CLLocation(latitude: b.lat, longitude: b.long)
+            return (userLocation.distanceFromLocation(aLocation) < userLocation.distanceFromLocation(bLocation))
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let deal = dealList[indexPath.item]
+        let location = CLLocation(latitude: deal.lat, longitude: deal.long)
+        centerMapOnLocation(location)
+    }
+    
 }
 
 class MyButton: UIButton {
