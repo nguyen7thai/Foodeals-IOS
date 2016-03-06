@@ -14,7 +14,6 @@
 		870874A71C7CADFB009CF8D1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 870874A51C7CADFB009CF8D1 /* LaunchScreen.storyboard */; };
 		870874B01C7CAE8B009CF8D1 /* DealClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870874AF1C7CAE8B009CF8D1 /* DealClient.swift */; };
 		870874B21C7CAE9D009CF8D1 /* DealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870874B11C7CAE9D009CF8D1 /* DealItem.swift */; };
-		870874B41C7CAEAE009CF8D1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870874B31C7CAEAE009CF8D1 /* Constants.swift */; };
 		870874B61C7CAF42009CF8D1 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870874B51C7CAF42009CF8D1 /* GCDBlackBox.swift */; };
 		870874B81C7CAF8C009CF8D1 /* mylocation.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 870874B71C7CAF8C009CF8D1 /* mylocation.gpx */; };
 		87CA7CB21C8B247E00EF4DE2 /* DealTableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CA7CB11C8B247E00EF4DE2 /* DealTableRow.swift */; };
@@ -32,7 +31,6 @@
 		870874A81C7CADFB009CF8D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		870874AF1C7CAE8B009CF8D1 /* DealClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealClient.swift; sourceTree = "<group>"; };
 		870874B11C7CAE9D009CF8D1 /* DealItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealItem.swift; sourceTree = "<group>"; };
-		870874B31C7CAEAE009CF8D1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		870874B51C7CAF42009CF8D1 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		870874B71C7CAF8C009CF8D1 /* mylocation.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = mylocation.gpx; sourceTree = "<group>"; };
 		87CA7CB11C8B247E00EF4DE2 /* DealTableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DealTableRow.swift; sourceTree = "<group>"; };
@@ -89,7 +87,6 @@
 			children = (
 				870874AF1C7CAE8B009CF8D1 /* DealClient.swift */,
 				870874B11C7CAE9D009CF8D1 /* DealItem.swift */,
-				870874B31C7CAEAE009CF8D1 /* Constants.swift */,
 				87D8939C1C85D93F00B850BA /* MapPin.swift */,
 				87CA7CB11C8B247E00EF4DE2 /* DealTableRow.swift */,
 			);
@@ -170,7 +167,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				870874B41C7CAEAE009CF8D1 /* Constants.swift in Sources */,
 				8708749F1C7CADFB009CF8D1 /* ViewController.swift in Sources */,
 				870874B01C7CAE8B009CF8D1 /* DealClient.swift in Sources */,
 				87CA7CB21C8B247E00EF4DE2 /* DealTableRow.swift in Sources */,

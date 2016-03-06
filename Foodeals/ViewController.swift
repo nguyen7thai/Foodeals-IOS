@@ -15,8 +15,8 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
     
     let geocoder = CLGeocoder()
     let locationmgr = CLLocationManager()
-    
-    var dealList:[DealItem] = []
+    var annotations:[MapPin] = []
+//    var dealList:[DealItem] = []
     
     @IBOutlet weak var dealTable: UITableView!
     @IBOutlet weak var displayMap: MKMapView!
@@ -36,8 +36,7 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
         let client = DealClient()
         client.getDeals { (data, error) in
             if error == nil {
-                var annotations = [MapPin]()
-                self.dealList = data!
+//                self.dealList = data!
                 for deal in data! {
                     let annotation = MapPin()
                     annotation.title = deal.title
@@ -45,13 +44,14 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
                     
                     let coordinate = CLLocationCoordinate2D(latitude: deal.lat, longitude: deal.long)
                     annotation.coordinate = coordinate
-                    annotation.dealUrl = deal.url
-                    annotations.append(annotation)
+//                    annotation.dealUrl = deal.url
+                    annotation.dealItem = deal
+                    self.annotations.append(annotation)
                 }
                 
                 performUIUpdatesOnMain {
                     self.dealTable.reloadData()
-                    self.displayMap.addAnnotations(annotations)
+                    self.displayMap.addAnnotations(self.annotations)
                 }
             } else {
                 print(error)
@@ -81,7 +81,6 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
                 let button = MyButton(type: .DetailDisclosure)
                 button.url = annotation.dealUrl
                 view.rightCalloutAccessoryView = button as UIView
-
             }
             return view
         } else {
@@ -98,20 +97,20 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let row = tableView.dequeueReusableCellWithIdentifier("dealRow")! as! DealTableRow
-        row.setItem(dealList[indexPath.item])
+        row.setItem(self.annotations[indexPath.item])
         
         return row
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dealList.count
+        return self.annotations.count
     }
     
 
     @IBAction func myCurrentLocation(sender: UIButton) {
         if let location = locationmgr.location {
             centerMapOnLocation(location)
-            self.dealList = self.sortDealListByDistance(self.dealList)
+            self.annotations = self.sortDealListByDistance(self.annotations)
             performUIUpdatesOnMain {
                 self.dealTable.reloadData()
             }
@@ -128,24 +127,18 @@ class ViewController: UIViewController, MKMapViewDelegate, UITableViewDataSource
         }
     }
 
-    func sortDealListByDistance(list: [DealItem]) -> [DealItem] {
+    func sortDealListByDistance(list: [MapPin]) -> [MapPin] {
         let userLocation = locationmgr.location!
         return list.sort { (a, b) -> Bool in
-            let aLocation = CLLocation(latitude: a.lat, longitude: a.long)
-            let bLocation = CLLocation(latitude: b.lat, longitude: b.long)
-            return (userLocation.distanceFromLocation(aLocation) < userLocation.distanceFromLocation(bLocation))
+            return (userLocation.distanceFromLocation(a.location()) < userLocation.distanceFromLocation(b.location()))
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let deal = dealList[indexPath.item]
-        let location = CLLocation(latitude: deal.lat, longitude: deal.long)
-        centerMapOnLocation(location)
+        let annotation = self.annotations[indexPath.item]
+        centerMapOnLocation(annotation.location())
+        self.displayMap.selectAnnotation(self.annotations[indexPath.item], animated: true)
     }
     
-}
-
-class MyButton: UIButton {
-    var url: String?
 }
 

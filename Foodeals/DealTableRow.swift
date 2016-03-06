@@ -10,7 +10,7 @@ import UIKit
 
 class DealTableRow: UITableViewCell {
     
-    func setItem(deal: DealItem) {
-        self.textLabel?.text = deal.title
+    func setItem(mapPin: MapPin) {
+        self.textLabel?.text = mapPin.dealItem.title
     }
 }

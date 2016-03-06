@@ -11,4 +11,13 @@ import MapKit
 
 class MapPin: MKPointAnnotation {
     var dealUrl: String?
+    var dealItem: DealItem!
+    
+    func location() -> CLLocation {
+        return CLLocation(latitude: dealItem.lat, longitude: dealItem.long)
+    }
+}
+
+class MyButton: UIButton {
+    var url: String?
 }
